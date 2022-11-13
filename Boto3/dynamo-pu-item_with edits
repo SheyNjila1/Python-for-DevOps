@@ -1,0 +1,39 @@
+import boto3
+
+session = boto3.session.Session(region_name="us-west-2")
+
+dynamodb = session.resource('dynamodb')
+
+table = dynamodb.Table('jjtech-students')
+
+def lambda_handler(event, context):
+    print(event)
+    response = table.put_item(
+        Item = {
+            "StudentId":"6546",
+            "StudentName":"Captain america",
+            "Age": 24,
+            "Country":"US"
+        }
+    )
+
+    print("Response of item insertion: ", response)
+
+
+
+#############Unharded##
+import boto3
+
+session = boto3.session.Session(region_name="us-west-2")
+
+dynamodb = session.resource('dynamodb')
+
+table = dynamodb.Table('jjtech-students')
+
+def lambda_handler(event, context):
+    print(event)
+    response = table.put_item(
+        Item = event
+    )
+
+    print("Response of item insertion: ", response)
